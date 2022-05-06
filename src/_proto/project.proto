@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package projects;
+
+message createProjectDto{
+    string projectName=1;
+    string customerName=2;
+    string projectEndDate=3;
+    string projectStartDate=4;
+    string projectStatus=5;
+    string projectHealth=6;
+    string accountManager=7;
+    string resources=8;
+    string comments=9;
+    string priSecPM=10;
+    string confluenceLink=11;
+    string salesPerson=12;
+    string department=13;
+    string resourceName=14;
+    string utilization=15;
+}
+
+message CreateProjectResponse{
+    bool success=1;
+    string message=2;
+    createProjectDto project=3;
+}
+
+message getProjectByIdDto{
+    string _id=1;
+}
+
+message getAllProjectsByIdDto{
+    string sortBy = 1;
+    int32 sortOrder = 2;
+    int32 limit = 3;
+    int32 offset = 4;
+}
+
+message GetAllProjectById{
+    repeated createProjectDto projects = 1;
+    int32 totalProjects = 2;
+}
+
+message editProjectDto{
+    string _id=1;
+    string confluenceLink=2;
+    string salesPerson=3;
+    string department=4;
+    string resourceName=5;
+    string utilization=6;
+}
+
+service ProjectService{
+        rpc createProject(createProjectDto) returns (CreateProjectResponse){}
+        rpc getProjectById(getProjectByIdDto) returns (createProjectDto){}
+        rpc getAllProjectsById(getAllProjectsByIdDto) returns (GetAllProjectById){}
+        rpc editProject(editProjectDto) returns (CreateProjectResponse){}
+}
